@@ -8,7 +8,7 @@ router.get("/:id", employeeControllers.getEmployeeById);
 router.post("/", employeeControllers.createNewEmployee);
 router.patch("/:id", employeeControllers.editEmployeeById);
 router.delete("/:id", employeeControllers.deleteEmployeeById);
-router.delete("/", employeeControllers.deleteEmployees);
-router.patch("/", employeeControllers.editEmployees);
+router.delete("/", employeeControllers.deleteEmployeeMoreThanOneId);
+router.patch("/", employeeControllers.editEmployeeMoreThanOneId);
 
 module.exports = router;

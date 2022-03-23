@@ -1,4 +1,5 @@
 const { employeeDB } = require("../database");
+const { nanoid } = require("nanoid");
 
 const employeeControllers = {
   getAllEmployees: (req, res) => {
@@ -120,7 +121,6 @@ const employeeControllers = {
       message: "Deleted employee",
     });
   },
-
   deleteEmployeeMoreThanOneId: (req, res) => {
     const employeesId = req.query.id;
 
@@ -144,39 +144,33 @@ const employeeControllers = {
       message: "Deleted employee",
     });
   },
-
-  editEmployees: (req, res) => {
+  editEmployeeMoreThanOneId: (req, res) => {
     const employeesId = req.query.id;
-    const data = req.body;
-    const arr = employeesId.split(",");
+    const editEmployeeData = req.body;
+    let result = [];
 
-    for (let i = 0; i < arr.length; i++) {
-      const findIndex = employeeDB.findIndex((val) => {
-        return val.id == arr[i];
+    for (let i = 0; i < employeesId.length; i++) {
+      const findIdx = employeeDB.findIndex((val) => {
+        return val.id == employeesId[i];
       });
 
-      if (findIndex == -1) {
+      if (findIdx == -1) {
         res.status(404).json({
           message: "Employee not found",
         });
         return;
-      } else if (data.length == 1) {
-        employeeDB[findIndex] = {
-          ...employeeDB[findIndex],
-          ...data[i],
-        };
-        return;
-      } else {
-        employeeDB[findIndex] = {
-          ...employeeDB[findIndex],
-          ...data,
-        };
       }
+      employeeDB[findIdx] = {
+        ...employeeDB[findIdx],
+        ...editEmployeeData,
+      };
 
-      res.status(200).json({
-        message: "sukses",
-      });
+      result.push(employeeDB[findIdx]);
     }
+    res.status(200).json({
+      message: "Edited employee",
+      result,
+    });
   },
 };
 

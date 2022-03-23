@@ -3,38 +3,38 @@ const employeeDB = [
     id: 1,
     full_name: "John Doe",
     occupation: "Software Engineer",
-    gender: "Male"
+    gender: "Male",
   },
   {
     id: 2,
     full_name: "Jane Doe",
     occupation: "Digital Marketer",
-    gender: "Female"
+    gender: "Female",
   },
   {
     id: 3,
     full_name: "Seto Siseto",
     occupation: "CEO",
-    gender: "Male"
+    gender: "Male",
   },
-]
+];
 
 const userDB = [
   {
     username: "seto",
-    password: "password"
+    password: "password",
   },
   {
     username: "bill",
-    password: "password"
+    password: "password",
   },
   {
     username: "mark",
-    password: "password"
+    password: "password",
   },
-]
+];
 
 module.exports = {
   employeeDB,
-  userDB
-}
+  userDB,
+};
