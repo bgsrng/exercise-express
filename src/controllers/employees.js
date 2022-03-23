@@ -121,28 +121,28 @@ const employeeControllers = {
     });
   },
 
-  deleteEmployees: (req, res) => {
+  deleteEmployeeMoreThanOneId: (req, res) => {
     const employeesId = req.query.id;
-    const arr = employeesId.split(",");
 
-    for (let i = 0; i < arr.length; i++) {
-      const findIndex = employeeDB.findIndex((val) => {
-        return val.id == arr[i];
+    console.log(employeesId);
+
+    for (let i = 0; i < employeesId.length; i++) {
+      const findIdx = employeeDB.findIndex((val) => {
+        return val.id == employeesId[i];
       });
 
-      if (findIndex == -1) {
+      if (findIdx == -1) {
         res.status(404).json({
           message: "Employee not found",
         });
         return;
-      } else {
-        employeeDB.splice(findIndex, 1);
       }
-
-      res.status(200).json({
-        message: "sukses banget",
-      });
+      employeeDB.splice(findIdx, 1);
     }
+
+    res.status(200).json({
+      message: "Deleted employee",
+    });
   },
 
   editEmployees: (req, res) => {
